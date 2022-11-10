@@ -43,7 +43,7 @@ public abstract class Shape {
     public static Shape createShape(ShapeType type, Color color, double x, double y, double size){
         return switch (type) {
             case CIRCLE -> new Circle(color,x, y, size);
-            case RECT -> new Square(color, x, y, size);
+            case SQUARE -> new Square(color, x, y, size);
         };
     }
 

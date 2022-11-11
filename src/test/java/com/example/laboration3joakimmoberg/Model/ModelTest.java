@@ -10,20 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class ModelTest {
 
     Shape circle = Shape.createShape(ShapeType.CIRCLE,Color.RED,30,50,50);
-    Shape square = Shape.createShape(ShapeType.SQUARE,Color.RED,30,50,50);
     ObsShape circleShape = new ObsShape(circle);
-    ObsShape squareShape = new ObsShape(square);
+    Model model=new Model();
 
-
-    @Test
-    void checkIfShapeIsAddedToList(){
-
-        Model.shapes.clear();
-        Model.shapes.add(circleShape);
-        Model.shapes.add(squareShape);
-        assertEquals(2, Model.shapes.size());
-
-    }
 
 
     @Test
@@ -31,5 +20,17 @@ class ModelTest {
         Model.shapes.clear();
         Model.shapes.add(circleShape);
         assertEquals(circleShape, Model.shapes.get(0));
+    }
+
+    @Test
+    void checkIfUndoHistoryIsUpdatedWhenAddingNewShape(){
+
+        Model.shapes.clear();
+        model.addShape(circleShape);
+
+        assertEquals(1,model.undoHistory.size());
+
+
+
     }
 }

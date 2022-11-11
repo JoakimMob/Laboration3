@@ -73,11 +73,8 @@ public class CanvasViewController {
         if (selectBtn.isSelected()) {
             model.selectMode(context, mouseEvent);
         } else {
-
-            //Create shape
             Shape shape = Shape.createShape(model.getCurrentShapeType(), model.getColor.getValue(), mouseEvent.getX(),
                     mouseEvent.getY(), Double.parseDouble(model.getText.getValue()));
-            //Add shape to models list of shapes
             model.addShape(shape);
 
         }

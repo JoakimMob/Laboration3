@@ -1,6 +1,5 @@
 package com.example.laboration3joakimmoberg;
 
-import com.example.laboration3joakimmoberg.controller.CanvasViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

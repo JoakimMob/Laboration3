@@ -5,7 +5,6 @@ import com.example.laboration3joakimmoberg.SaveSvg;
 import com.example.laboration3joakimmoberg.Shapes.Shape;
 import com.example.laboration3joakimmoberg.Shapes.ShapeType;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
 import javafx.application.Platform;
 import javafx.beans.Observable;

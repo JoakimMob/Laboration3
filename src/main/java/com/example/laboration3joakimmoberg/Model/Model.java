@@ -31,10 +31,6 @@ public class Model {
         return currentShapeType;
     }
 
-    public void setCurrentShapeType(ShapeType currentShapeType) {
-        this.currentShapeType.set(currentShapeType);
-    }
-
     public ObservableList<? extends Shape> getShapes() {
         return shapes;
     }

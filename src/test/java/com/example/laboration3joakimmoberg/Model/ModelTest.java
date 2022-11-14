@@ -30,7 +30,5 @@ class ModelTest {
 
         assertEquals(1,model.undoHistory.size());
 
-
-
     }
 }

@@ -7,7 +7,6 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 
@@ -36,12 +35,12 @@ public class Model {
     }
 
 
-    public void selectMode(MouseEvent mouseEvent) {
+    public void selectMode(double x, double y) {
         for (int i = shapes.size() - 1; i >= 0; i--) {
-            if (mouseEvent.getX() <= shapes.get(i).getX() + shapes.get(i).getSize() / 2
-                    && mouseEvent.getX() >= shapes.get(i).getX() - shapes.get(i).getSize() / 2
-                    && mouseEvent.getY() <= shapes.get(i).getY() + shapes.get(i).getSize() / 2
-                    && mouseEvent.getY() >= shapes.get(i).getY() - shapes.get(i).getSize() / 2) {
+            if (x <= shapes.get(i).getX() + shapes.get(i).getSize() / 2
+                    && x >= shapes.get(i).getX() - shapes.get(i).getSize() / 2
+                    && y <= shapes.get(i).getY() + shapes.get(i).getSize() / 2
+                    && y >= shapes.get(i).getY() - shapes.get(i).getSize() / 2) {
                 shapes.get(i).setColor(getColor.getValue());
                 shapes.get(i).setSize(Double.parseDouble(getText.get()));
 
@@ -64,18 +63,17 @@ public class Model {
 
     }
 
-    public void redoShape(GraphicsContext context) {
+    public void redoShape() {
         if (!redoHistory.empty()) {
             ObsShape shape = redoHistory.lastElement();
-            context.setFill(shape.getColor());
+            Color color = shape.getColor();
 
             redoHistory.pop();
             undoHistory.push(shape);
             shapes.add(shape);
 
-
             Shape lastUndo = undoHistory.lastElement();
-            lastUndo.setColor((Color) context.getFill());
+            lastUndo.setColor(color);
 
         }
     }

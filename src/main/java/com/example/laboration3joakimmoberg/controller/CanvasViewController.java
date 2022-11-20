@@ -56,13 +56,14 @@ public class CanvasViewController {
         SaveSvg.save(model);
 
         try {
-            Image snapShot= canvas.snapshot(null,null);
+            Image snapShot = canvas.snapshot(null, null);
             ImageIO.write(SwingFXUtils.fromFXImage(snapShot, null), "png", new File("paint.png"));
         } catch (Exception e) {
             System.out.println("Failed to save " + e);
         }
 
     }
+
     public void onExit() {
         Platform.exit();
     }
@@ -70,7 +71,9 @@ public class CanvasViewController {
     public void canvasClicked(MouseEvent mouseEvent) {
 
         if (selectBtn.isSelected()) {
-            model.selectMode(mouseEvent);
+            double x = mouseEvent.getX();
+            double y = mouseEvent.getY();
+            model.selectMode(x, y);
             clearCanvas();
             for (Shape s : model.getShapes()) {
                 s.drawShape(context);
@@ -83,13 +86,9 @@ public class CanvasViewController {
         }
     }
 
-    public void clearCanvas(){
-        context.clearRect(0, 0, 600, 600);
-    }
-
 
     public void onUndoBtn(ActionEvent actionEvent) {
-        if (!model.undoHistory.empty()){
+        if (!model.undoHistory.empty()) {
             clearCanvas();
             model.undoShape();
             for (int i = 0; i < model.undoHistory.size(); i++) {
@@ -101,6 +100,10 @@ public class CanvasViewController {
     }
 
     public void onRedoBtn(ActionEvent actionEvent) {
-        model.redoShape(context);
+        model.redoShape();
+    }
+
+    public void clearCanvas() {
+        context.clearRect(0, 0, 600, 600);
     }
 }

@@ -14,14 +14,6 @@ class ModelTest {
     Model model=new Model();
 
 
-
-    @Test
-    void checkIfSpecificShapeIsCreated(){
-        Model.shapes.clear();
-        Model.shapes.add(circleShape);
-        assertEquals(circleShape, Model.shapes.get(0));
-    }
-
     @Test
     void checkIfUndoHistoryIsUpdatedWhenAddingNewShape(){
 
@@ -31,4 +23,16 @@ class ModelTest {
         assertEquals(1,model.undoHistory.size());
 
     }
+    @Test
+    void checkIfRedoHistoryIsUpdatedWhenUndoShapeIsUsed(){
+
+        Model.shapes.clear();
+        model.addShape(circleShape);
+        model.addShape(circleShape);
+        model.undoShape();
+
+        assertEquals(1,model.redoHistory.size());
+    }
+
+
 }

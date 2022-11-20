@@ -70,7 +70,11 @@ public class CanvasViewController {
     public void canvasClicked(MouseEvent mouseEvent) {
 
         if (selectBtn.isSelected()) {
-            model.selectMode(context, mouseEvent);
+            model.selectMode(mouseEvent);
+            clearCanvas();
+            for (Shape s : model.getShapes()) {
+                s.drawShape(context);
+            }
         } else {
             Shape shape = Shape.createShape(model.getCurrentShapeType(), model.getColor.getValue(), mouseEvent.getX(),
                     mouseEvent.getY(), Double.parseDouble(model.getText.getValue()));
@@ -79,9 +83,21 @@ public class CanvasViewController {
         }
     }
 
+    public void clearCanvas(){
+        context.clearRect(0, 0, 600, 600);
+    }
+
 
     public void onUndoBtn(ActionEvent actionEvent) {
-        model.undoShape(context);
+        if (!model.undoHistory.empty()){
+            clearCanvas();
+            model.undoShape();
+            for (int i = 0; i < model.undoHistory.size(); i++) {
+                Shape shape = model.undoHistory.elementAt(i);
+                shape.drawShape(context);
+            }
+        }
+
     }
 
     public void onRedoBtn(ActionEvent actionEvent) {
